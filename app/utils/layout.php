@@ -17,7 +17,7 @@
 </header>
 <?php endif; ?>
 <main class="container mx-auto">
-    <?php include_once "./views/$view" ?>
+    <?php include_once './views/' . $view; ?>
 </main>
 </body>
 </html>

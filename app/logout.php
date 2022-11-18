@@ -1,6 +1,4 @@
 <?php
-session_start();
+require './controllers/AuthController.php';
 
-unset($_SESSION['username'], $_SESSION['isAdmin'], $_SESSION['userId']);
-
-header('Location: /');
+AuthController::signup();
