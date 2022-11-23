@@ -1,0 +1,17 @@
+{
+    "name": "arthurfontaine/high",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arthur Fontaine",
+            "email": "0arthur.fontaine@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-pdo": "*"
+    }
+}
