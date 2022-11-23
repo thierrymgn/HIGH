@@ -1,0 +1,79 @@
+[
+  {
+    "name": "home",
+    "path": "/",
+    "controller": "Home",
+    "view": "Home",
+    "method": "GET"
+  },
+  {
+    "name": "post",
+    "path": "/posts/:id",
+    "controller": "Post",
+    "view": "Post",
+    "method": "GET"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "controller": "Login",
+    "view": "Login",
+    "method": "GET"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "controller": "Base",
+    "action": "Login",
+    "method": "POST"
+  },
+  {
+    "name": "signup",
+    "path": "/signup",
+    "controller": "Signup",
+    "view": "Signup",
+    "method": "GET"
+  },
+  {
+    "name": "signup",
+    "path": "/signup",
+    "controller": "Base",
+    "action": "Signup",
+    "method": "POST"
+  },
+  {
+    "name": "logout",
+    "path": "/logout",
+    "controller": "Base",
+    "action": "Logout",
+    "method": "GET"
+  },
+  {
+    "name": "new post",
+    "path": "/posts",
+    "controller": "Base",
+    "action": "NewPost",
+    "method": "POST"
+  },
+  {
+    "name": "edit post",
+    "path": "/posts/:id/edit",
+    "controller": "EditPost",
+    "view": "EditPost",
+    "method": "GET"
+  },
+  {
+    "name": "edit post",
+    "path": "/posts/:id/edit",
+    "controller": "Base",
+    "action": "EditPost",
+    "method": "POST"
+  },
+  {
+    "name": "delete post",
+    "path": "/posts/:id/delete",
+    "controller": "Base",
+    "action": "DeletePost",
+    "method": "POST"
+  }
+]
