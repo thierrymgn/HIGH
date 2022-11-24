@@ -13,7 +13,7 @@ try {
   $user = User::createUser(new UserEntity([
       'username' => $data['username'],
       'password' => password_hash($data['password'], PASSWORD_DEFAULT),
-      'admin' => 0,
+      'admin' => count(User::getUsers()) === 0,
   ]));
 
   Session::save($user);
