@@ -89,5 +89,19 @@
     "controller": "Base",
     "action": "DeleteComment",
     "method": "POST"
+  },
+  {
+    "name": "edit comment",
+    "path": "/posts/:id/comments/:commentId/edit",
+    "controller": "EditComment",
+    "view": "EditComment",
+    "method": "GET"
+  },
+  {
+    "name": "edit comment",
+    "path": "/posts/:id/comments/:commentId/edit",
+    "controller": "Base",
+    "action": "EditComment",
+    "method": "POST"
   }
 ]
