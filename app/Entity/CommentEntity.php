@@ -3,13 +3,12 @@
 namespace App\Entity;
 
 use App\Model\User;
-use App\Model\Comment;
 
-class PostEntity
+class CommentEntity
 {
     private int $_id;
     private int $_user_id;
-    private string $_title;
+    private int $_post_id;
     private string $_content;
     private string $_created_at;
 
@@ -35,9 +34,9 @@ class PostEntity
         return User::getUser($this->_user_id);
     }
 
-    public function getTitle(): string
+    public function getPostId(): int
     {
-        return $this->_title;
+        return $this->_post_id;
     }
 
     public function getContent(): string
@@ -48,10 +47,5 @@ class PostEntity
     public function getCreatedAt(): string
     {
         return $this->_created_at;
-    }
-
-    public function getComments(): array
-    {
-        return Comment::getCommentsByPostId($this->_id);
     }
 }

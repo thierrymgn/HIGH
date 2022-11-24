@@ -75,5 +75,19 @@
     "controller": "Base",
     "action": "DeletePost",
     "method": "POST"
+  },
+  {
+    "name": "new comment",
+    "path": "/posts/:id/comments",
+    "controller": "Base",
+    "action": "NewComment",
+    "method": "POST"
+  },
+  {
+    "name": "delete comment",
+    "path": "/posts/:id/comments/:commentId/delete",
+    "controller": "Base",
+    "action": "DeleteComment",
+    "method": "POST"
   }
 ]
