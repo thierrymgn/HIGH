@@ -33,6 +33,15 @@ class User
         ]);
     }
 
+    public static function updateUser(UserEntity $user): UserEntity
+    {
+        return self::getManager()->update($user->getId(), [
+            'username' => $user->getUsername(),
+            'password' => $user->getPassword(),
+            'admin' => $user->admin() ? 1 : 0,
+        ]);
+    }
+
     public static function deleteUser(int $id): void
     {
         self::getManager()->delete($id);
