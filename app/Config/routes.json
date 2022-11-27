@@ -110,5 +110,19 @@
     "controller": "Base",
     "action": "EditComment",
     "method": "POST"
+  },
+  {
+    "name": "view users",
+    "path": "/users",
+    "controller": "Users",
+    "view": "Users",
+    "method": "GET"
+  },
+  {
+    "name": "delete user",
+    "path": "/users/:id/delete",
+    "controller": "Base",
+    "action": "DeleteUser",
+    "method": "POST"
   }
 ]
