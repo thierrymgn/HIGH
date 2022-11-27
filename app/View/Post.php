@@ -85,7 +85,7 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
         <span class="font-light text-gray-600"><?= $post->getCreatedAt() ?></span>
         <span class="font-light text-gray-600"><?= $post->getUser()->getUsername() ?></span>
         <div class="flex gap-2">
-            <?php if (null !== Session::get() && (Session::get()->admin() == 1 || Session::get()->getId() == $post->getUserId())): ?>
+            <?php if (null !== Session::get() && (Session::get()->admin() == 1 || Session::get()->getId() == $post->getUserId())) : ?>
                 <a href="/posts/<?= $post->getId() ?>/edit" class="text-sm font-medium text-blue-600 hover:underline">Edit</a>
                 <form action="/posts/<?= $post->getId() ?>/delete" method="post" class="contents">
                     <input type="submit" value="Delete" class="text-sm font-medium text-red-600 hover:underline cursor-pointer">
@@ -97,15 +97,18 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
         <a href="/posts/<?= $post->getId() ?>" class="text-2xl text-gray-700 font-bold hover:underline"><?= $post->getTitle() ?></a>
         <p class="mt-2 text-gray-600"><?= nl2br($post->getContent()) ?></p>
     </div>
+    <?php if ($post->getImage() !== '') : ?>
+        <img src="data:image/jpeg;base64,<?= base64_encode($post->getImage()) ?>" class="w-full mt-4">
+    <?php endif; ?>
 </article>
 
 <section class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
     <h1 class="text-2xl">Comments</h1>
     <form action="/posts/<?= $post->getId() ?>/comments" method="post" id="new-comment" class="flex flex-col gap-4">
-        <?php if (null === Session::get()): ?>
+        <?php if (null === Session::get()) : ?>
             <div class="text-red-500">You must be logged in to comment</div>
         <?php endif; ?>
-        <?php if (isset($error)): ?>
+        <?php if (isset($error)) : ?>
             <div class="text-red-500"><?= $error ?></div>
         <?php endif; ?>
         <div class="flex flex-col gap-2">
@@ -117,8 +120,8 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
         </div>
     </form>
     <div class="mt-2 flex flex-col gap-4">
-        <?php foreach ($comments as $comment): ?>
-            <?php if (null === $comment->getCommentParentId()): ?>
+        <?php foreach ($comments as $comment) : ?>
+            <?php if (null === $comment->getCommentParentId()) : ?>
                 <?= generate_comment($comment, $post, 1) ?>
             <?php endif; ?>
         <?php endforeach; ?>
