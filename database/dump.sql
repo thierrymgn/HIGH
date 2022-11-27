@@ -25,7 +25,35 @@ CREATE TABLE
         post_id INT NOT NULL,
         content TEXT NOT NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        comment_parent_id INT DEFAULT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (post_id) REFERENCES posts(id)
+        FOREIGN KEY (post_id) REFERENCES posts(id),
+        FOREIGN KEY (comment_parent_id) REFERENCES comments(id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+-- Feed the database
+
+INSERT INTO
+    users (username, password, admin)
+VALUES (
+        'admin',
+        '$2y$10$Q8QZQZQZQZQZQZQZQZQZQe',
+        1
+    );
+
+INSERT INTO
+    posts (user_id, title, content)
+VALUES (
+        1,
+        'Hello World',
+        'This is my first post'
+    );
+
+INSERT INTO
+    comments (user_id, post_id, content)
+VALUES (
+        1,
+        1,
+        'This is my first comment'
+    );

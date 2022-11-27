@@ -52,6 +52,6 @@ class PostEntity
 
     public function getComments(): array
     {
-        return Comment::getCommentsByPostId($this->_id);
+        return Comment::getCommentsBy('post_id', $this->_id);
     }
 }
