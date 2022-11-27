@@ -25,6 +25,7 @@ class Post
             'user_id' => $post->getUserId(),
             'title' => $post->getTitle(),
             'content' => $post->getContent(),
+            'image' => $post->getImage(),
         ]);
     }
 
@@ -34,6 +35,7 @@ class Post
             'user_id' => $post->getUserId(),
             'title' => $post->getTitle(),
             'content' => $post->getContent(),
+            'image' => $post->getImage(),
         ]);
     }
 

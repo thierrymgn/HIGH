@@ -13,9 +13,10 @@ CREATE TABLE
         user_id INT NOT NULL,
         title VARCHAR(50) NOT NULL,
         content TEXT NOT NULL,
+        image LONGBLOB NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (id),
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        FOREIGN KEY (user_id) REFERENCES users(id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE
