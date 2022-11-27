@@ -6,8 +6,8 @@ use App\Utils\Session;
 $users = User::getUsers();
 
 if (null === Session::get() || null === Session::get()->getId()) {
-  header('Location: /');
-  exit;
+    header('Location: /');
+    exit;
 }
 
 ?>
@@ -29,11 +29,10 @@ if (null === Session::get() || null === Session::get()->getId()) {
                             <tr>
                                 <td class="px-4 py-2"><?= $user->getId() ?></td>
                                 <td class="px-4 py-2"><?= $user->getUsername() ?></td>
-                                <?php if (Session::get()->admin() && Session::get()->getId() !== $user->getId()) : ?>
+                                <?php if ($user->admin() && Session::get()->getId() !== $user->getId()) : ?>
                                     <td class="px-4 py-2">
                                         <form method="post" action="/users/<?= $user->getId() ?>/delete">
-                                            <input type="submit" name="submit" value="Delete"
-                                                   class="text-sm font-medium text-red-600 hover:underline cursor-pointer">
+                                            <input type="submit" name="submit" value="Delete" class="text-sm font-medium text-red-600 hover:underline cursor-pointer">
                                         </form>
                                     </td>
                                 <?php endif; ?>

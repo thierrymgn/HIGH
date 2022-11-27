@@ -32,6 +32,9 @@ if (null !== Session::get() && null !== Session::get()->getId()) {
                     <?php else : ?>
                         <a href="/login" class="text-lg">Login</a>
                     <?php endif; ?>
+                    <?php if (null !== Session::get() && $user->admin() == 1) : ?>
+                        <a href="/users" class="text-lg">Users (ADMIN ONLY)</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>
