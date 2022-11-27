@@ -33,6 +33,11 @@ class User
         ]);
     }
 
+    public static function deleteUser(int $id): void
+    {
+        self::getManager()->delete($id);
+    }
+
     private static function getManager(): Manager
     {
         if (self::$_manager === null) {

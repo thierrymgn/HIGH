@@ -15,7 +15,7 @@ CREATE TABLE
         content TEXT NOT NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (id),
-        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE
@@ -27,9 +27,9 @@ CREATE TABLE
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         comment_parent_id INT DEFAULT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (post_id) REFERENCES posts(id),
-        FOREIGN KEY (comment_parent_id) REFERENCES comments(id)
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+        FOREIGN KEY (comment_parent_id) REFERENCES comments(id) ON DELETE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- Feed the database
