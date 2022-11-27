@@ -15,9 +15,9 @@ class Comment
     return self::getManager()->getById($id);
   }
 
-  public static function getCommentsByPostId(int $post_id): array
+  public static function getCommentsBy(string $field, int $post_id): array
   {
-    return self::getManager()->getBy('post_id', $post_id);
+    return self::getManager()->getBy($field, $post_id);
   }
 
   public static function createComment(CommentEntity $comment): CommentEntity
@@ -26,6 +26,7 @@ class Comment
       'user_id' => $comment->getUserId(),
       'post_id' => $comment->getPostId(),
       'content' => $comment->getContent(),
+      'comment_parent_id' => $comment->getCommentParentId(),
     ]);
   }
 

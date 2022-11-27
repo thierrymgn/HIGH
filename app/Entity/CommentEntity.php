@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Model\User;
+use App\Model\Comment;
 
 class CommentEntity
 {
@@ -11,6 +12,7 @@ class CommentEntity
     private int $_post_id;
     private string $_content;
     private string $_created_at;
+    private int|null $_comment_parent_id = null;
 
     public function __construct($data)
     {
@@ -47,5 +49,20 @@ class CommentEntity
     public function getCreatedAt(): string
     {
         return $this->_created_at;
+    }
+
+    public function getCommentParentId(): int|null
+    {
+        return $this->_comment_parent_id;
+    }
+
+    public function getCommentParent(): CommentEntity
+    {
+        return Comment::getComment($this->_comment_parent_id);
+    }
+
+    public function getComments(): array
+    {
+        return Comment::getCommentsBy('comment_parent_id', $this->_id);
     }
 }

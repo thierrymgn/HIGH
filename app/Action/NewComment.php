@@ -19,6 +19,7 @@ try {
       'content' => $data['content'],
       'user_id' => Session::get()->getId(),
       'post_id' => intval($params['id']),
+      'comment_parent_id' => isset($params['commentId']) ? intval($params['commentId']) : null,
   ]));
 
   header('Location: /posts/' . $comment->getPostId());
