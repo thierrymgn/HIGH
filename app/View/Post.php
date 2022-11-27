@@ -6,12 +6,19 @@ use App\Entity\CommentEntity;
 use App\Model\Comment;
 use App\Model\Post;
 use App\Entity\PostEntity;
+use App\Entity\UserEntity;
 use App\Utils\Session;
+use App\Model\User;
 
 $post_id = $params['id'];
 
 if (!isset($post_id)) {
     header('Location: /');
+}
+
+
+if (null !== Session::get() && null !== Session::get()->getId()) {
+    $user = User::getUser(Session::get()->getId());
 }
 
 $post = Post::getPost($post_id);
@@ -21,11 +28,11 @@ if ($post === null) {
     echo "Post not found"; die;
 }
 
-function generate_comment(CommentEntity $comment, PostEntity $post, int $deepness)
+function generate_comment(CommentEntity $comment, PostEntity $post, UserEntity $user, int $deepness)
 {
     $comments_of_comment = $comment->getComments();
 
-    if ((null !== Session::get() && (Session::get()->admin() == 1 || Session::get()->getId() == $comment->getUserId()))) {
+    if ((null !== Session::get() && ($user->admin() == 1 || Session::get()->getId() == $comment->getUserId()))) {
         $edit_link = '<a href="/posts/' . $post->getId() . '/comments/' . $comment->getId() . '/edit" class="text-sm font-medium text-blue-600 hover:underline">Edit</a>';
         $delete_link = '<form action="/posts/' . $post->getId() . '/comments/' . $comment->getId() . '/delete" method="post" class="contents">
             <input type="submit" value="Delete" class="text-sm font-medium text-red-600 hover:underline cursor-pointer">
@@ -38,7 +45,7 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
     if (count($comments_of_comment) > 0) {
         $comments_of_comment_html = '<div class="mt-' . ($deepness * 2) . ' flex flex-col gap-4">';
         foreach ($comments_of_comment as $comment_of_comment) {
-            $comments_of_comment_html .= generate_comment($comment_of_comment, $post, $deepness + 1);
+            $comments_of_comment_html .= generate_comment($comment_of_comment, $post, $user, $deepness + 1);
         }
         $comments_of_comment_html .= '</div>';
     } else {
@@ -85,7 +92,7 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
         <span class="font-light text-gray-600"><?= $post->getCreatedAt() ?></span>
         <span class="font-light text-gray-600"><?= $post->getUser()->getUsername() ?></span>
         <div class="flex gap-2">
-            <?php if (null !== Session::get() && (Session::get()->admin() == 1 || Session::get()->getId() == $post->getUserId())): ?>
+            <?php if (null !== Session::get() && ($user->admin() == 1 || Session::get()->getId() == $post->getUserId())) : ?>
                 <a href="/posts/<?= $post->getId() ?>/edit" class="text-sm font-medium text-blue-600 hover:underline">Edit</a>
                 <form action="/posts/<?= $post->getId() ?>/delete" method="post" class="contents">
                     <input type="submit" value="Delete" class="text-sm font-medium text-red-600 hover:underline cursor-pointer">
@@ -102,10 +109,10 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
 <section class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
     <h1 class="text-2xl">Comments</h1>
     <form action="/posts/<?= $post->getId() ?>/comments" method="post" id="new-comment" class="flex flex-col gap-4">
-        <?php if (null === Session::get()): ?>
+        <?php if (null === Session::get()) : ?>
             <div class="text-red-500">You must be logged in to comment</div>
         <?php endif; ?>
-        <?php if (isset($error)): ?>
+        <?php if (isset($error)) : ?>
             <div class="text-red-500"><?= $error ?></div>
         <?php endif; ?>
         <div class="flex flex-col gap-2">
@@ -117,9 +124,9 @@ function generate_comment(CommentEntity $comment, PostEntity $post, int $deepnes
         </div>
     </form>
     <div class="mt-2 flex flex-col gap-4">
-        <?php foreach ($comments as $comment): ?>
-            <?php if (null === $comment->getCommentParentId()): ?>
-                <?= generate_comment($comment, $post, 1) ?>
+        <?php foreach ($comments as $comment) : ?>
+            <?php if (null === $comment->getCommentParentId()) : ?>
+                <?= generate_comment($comment, $post, $user, 1) ?>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>

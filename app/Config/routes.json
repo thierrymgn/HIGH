@@ -124,5 +124,19 @@
     "controller": "Base",
     "action": "DeleteUser",
     "method": "POST"
+  },
+  {
+    "name": "edit user",
+    "path": "/users/:id/edit",
+    "controller": "EditUser",
+    "view": "EditUser",
+    "method": "GET"
+  },
+  {
+    "name": "edit user",
+    "path": "/users/:id/edit",
+    "controller": "Base",
+    "action": "EditUser",
+    "method": "POST"
   }
 ]
