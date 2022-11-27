@@ -104,6 +104,9 @@ function generate_comment(CommentEntity $comment, PostEntity $post, UserEntity $
         <a href="/posts/<?= $post->getId() ?>" class="text-2xl text-gray-700 font-bold hover:underline"><?= $post->getTitle() ?></a>
         <p class="mt-2 text-gray-600"><?= nl2br($post->getContent()) ?></p>
     </div>
+    <?php if ($post->getImage() !== '') : ?>
+        <img src="data:image/jpeg;base64,<?= base64_encode($post->getImage()) ?>" class="w-full mt-4">
+    <?php endif; ?>
 </article>
 
 <section class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">

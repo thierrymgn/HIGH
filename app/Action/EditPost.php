@@ -17,9 +17,10 @@ if (null === Session::get() || null === Session::get()->getId()) {
 
 try {
   $post = Post::updatePost(intval($params['id']), new PostEntity([
-      'title' => $data['title'],
-      'content' => $data['content'],
-      'user_id' => Post::getPost(intval($params['id']))->getUserId(),
+    'title' => $_POST['title'],
+    'content' => $_POST['content'],
+    'image' => file_get_contents($_FILES['image']['tmp_name']),
+    'user_id' => Post::getPost(intval($params['id']))->getUserId(),
   ]));
 
   header('Location: /posts/' . $post->getId());

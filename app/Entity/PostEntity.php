@@ -11,6 +11,7 @@ class PostEntity
     private int $_user_id;
     private string $_title;
     private string $_content;
+    private ?string $_image;
     private string $_created_at;
 
     public function __construct($data)
@@ -43,6 +44,11 @@ class PostEntity
     public function getContent(): string
     {
         return $this->_content;
+    }
+
+    public function getImage(): string
+    {
+        return $this->_image ?? '';
     }
 
     public function getCreatedAt(): string
