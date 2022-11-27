@@ -29,7 +29,7 @@ if (null === Session::get() || null === Session::get()->getId()) {
                             <tr>
                                 <td class="px-4 py-2"><?= $user->getId() ?></td>
                                 <td class="px-4 py-2"><?= $user->getUsername() ?></td>
-                                <?php if (Session::get()->admin()) : ?>
+                                <?php if (Session::get()->admin() && Session::get()->getId() !== $user->getId()) : ?>
                                     <td class="px-4 py-2">
                                         <form method="post" action="/users/<?= $user->getId() ?>/delete">
                                             <input type="submit" name="submit" value="Delete"
