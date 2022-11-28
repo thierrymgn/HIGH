@@ -22,7 +22,9 @@ if (null !== Session::get() && null !== Session::get()->getId()) {
     <?php if (!isset($show_header) || $show_header) : ?>
         <header class="bg-blue-600 text-white p-4 mb-8">
             <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-2xl"><?= $title ?></h1>
+                <a href="/">
+                    <h1 class="text-2xl"><?= $title ?></h1>
+                </a>
                 <div class="flex gap-4">
                     <?php if (null !== Session::get() && null !== Session::get()->getId()) : ?>
                         <a href="/users/<?= Session::get()->getId() ?>/edit" class="text-lg">Edit user <span class="text-purple-700 uppercase"><?= $user->getUsername() ?></span></a>
